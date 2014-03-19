@@ -113,4 +113,3 @@ class PostsController extends AppController {
     
     
 }
-?>

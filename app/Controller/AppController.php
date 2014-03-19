@@ -30,31 +30,27 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
-
 class AppController extends Controller {
-
 	public $components = array(
-    	'Session',
-  	  	'Auth' => array(
-        'loginRedirect' => array('controller' => 'posts', 'action' => 'index', 'loggedin'),
-        'logoutRedirect' => array('controller' => 'pages','action' => 'display', 'home' , 'loggedout'),
-        'authorize' => array('Controller') // Added this line
-    	)
-	);
+        'Acl',
+        'Auth',
+        'Session'
+        );
+        public $helpers = array('Html', 'Form', 'Session');
 
-	public function isAuthorized($user) {
-    // Admin can access every action
-    if (isset($user['role']) && $user['role'] === 'admin') {
-        return true;
-    }
+        /**
+         * beforeFilter method
+         *
+         * @return void
+         */
+        function beforeFilter() {
+        	//Configure AuthComponent
+        	$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+        	$this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
+        	$this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'add');
 
-    // Default deny
-    return false;
+        	$this->Auth->actionPath = 'controllers'; // Ważne określenie ścieżki działania dla ACL
+
+        	$this->Auth->allow('display');
+        }
 }
-
-    public function beforeFilter() {
-        $this->Auth->allow('index', 'view');
-    }
-    
-}
-?>
