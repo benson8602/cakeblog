@@ -1,25 +1,25 @@
 <div class="users form">
-<?php echo $this->Form->create('User');?>
-	<fieldset>
-		<legend><?php echo __('Edit User'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('username');
-		echo $this->Form->input('password');
-		echo $this->Form->input('group_id');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+    <!-- File: /app/View/Users/edit.ctp -->
+	<?php echo $this->Form->create('User');?>
+		<h3>Edit Users</h3>
+		<fieldset>
+			<?php 		
+				echo $this->Form->hidden('id', array('value' => $this->data['User']['id']));
+				echo $this->Form->input('username', array( 'readonly' => 'readonly', 'label' => 'Usernames cannot be changed!'));
+				echo $this->Form->input('password', array( 'password' => 'New Password (leave empty if you do not want to change)', 'maxLength' => 255, 'type'=>'password','required' => 0));
+				echo $this->Form->input('password_confirmation', array('password' => 'Confirm New Password *', 'maxLength' => 255, 'title' => 'Confirm New password', 'type'=>'password','required' => 0));
+				echo $this->Form->input('role', array('options' => array( 'admin' => 'Admin', 'author' => 'Author', 'customer'=>'Customer')));
+				echo $this->Form->submit('Edit', array('class' => 'form-submit',  'title' => 'Click here to add the user') );
+			?>	
+		</fieldset>
+	<?php echo $this->Form->end(); ?>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
 
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('User.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('User.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Users'), array('action' => 'index'));?></li>
-		<li><?php echo $this->Html->link(__('List Groups'), array('controller' => 'groups', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Group'), array('controller' => 'groups', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Posts'), array('controller' => 'posts', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Post'), array('controller' => 'posts', 'action' => 'add')); ?> </li>
-	</ul>
+<div class="actions">	
+	<ul>
+		<li><?php echo $this->Html->link("Return to Users Index",array('action'=>'index')); ?></li>
+		<li><?php echo $this->Html->link(__('Add Blog'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link('Logout',array('controller'=>'users', 'action'=>'logout')); ?></li>		
+	</ul>	
 </div>
+	
