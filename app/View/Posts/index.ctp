@@ -1,9 +1,5 @@
 <h1>Blog posts</h1>
-<?php echo $this->Html->link(
-    'Add Post',
-    array('controller' => 'posts', 'action' => 'add')
-); 
-?>
+
 <table>
     <tr>
         <th>Id</th>
@@ -36,3 +32,11 @@
     <?php endforeach; ?>
     <?php unset($post); ?>
 </table>
+
+<p>
+    <?php echo $this->Html->link(
+    'New Post',
+    array('controller' => 'posts', 'action' => 'add')
+); 
+?>
+</p>
