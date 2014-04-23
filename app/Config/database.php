@@ -79,7 +79,7 @@ class DATABASE_CONFIG {
  		'persistent' => false,
 		'host' => 'eu-cdbr-azure-north-c.cloudapp.net',
  		'login' => 'b90520d66503bb',
-		'password' => '5ce1d2f7',
+		'password' => '28d7556cfb960d6',
 		'database' => 'ctbensoAPlZaHIDZ',
 		'prefix' => '',
 		//'encoding' => 'utf8',
