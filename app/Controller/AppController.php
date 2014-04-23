@@ -34,24 +34,56 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
 	public $components = array(
-		//'DebugKit.Toolbar',
+        //'DebugKit.Toolbar',
         'Session',
         'Auth' => array(
             'loginRedirect' => array(
-                'controller' => 'posts',
+                'controller' => 'posts', 
                 'action' => 'index'
-            ),
+                ),
             'logoutRedirect' => array(
-                'controller' => 'users',
-                'action' => 'login',
-            ),
-            'authorize' => array('Controller')
+                'controller' => 'pages',
+                'action' => 'display',
+                'home'
+                ), 
+        
+            'authorize' => array('Controller'),
+            // Added this line
+            'logoutRedirect' => array(
+                'controller' => 'pages',
+                'action' => 'display',
+                'home'
+            )
+               
         )
     );
 	
 	public function beforeFilter(){
-		$this->Auth->allow('index','logout', 'display');
+		$this->Auth->allow('index','view','logout', 'display');
+                $this->Auth->auhError = 'Please login to view that page.';
+                $this->Auth->loginError = 'Incorrect username/password combination';
+                $this->Auth->loginRedirect = array('controller' => 'posts', 'action' => 'index');
+                $this->Auth->logoutRedirect = array('controller' => 'posts', 'action' => 'index');
+                
+                $this->set('admin', $this->_isAdmin());
+                $this->set('logged_in', $this->_loggedIn());
+                //$this->set('user_username', $this->_userUsername());
 	}
+        function _isAdmin(){
+            $admin = FALSE;
+            if ($this->Auth->user('role')=='admin'){
+                $admin = TRUE; 
+        }
+            return $admin;
+        }
+        
+        function _loggedIn(){
+            $logged_in = FALSE;
+            if ($this->Auth->user()){
+                $logged_in =TRUE;
+            }
+            return $logged_in;
+        }
 	
 	public function isAuthorized($user) {
     // Admin can access every action

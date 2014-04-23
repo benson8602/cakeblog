@@ -1,13 +1,20 @@
 <!-- app/View/Users/add.ctp -->
+
+
 <div class="users form">
 <?php echo $this->Form->create('User'); ?>
     <fieldset>
-        <legend><?php echo __('Add User'); ?></legend>
+        <legend><?php echo __('Register User'); ?></legend>
+        <!-- echo $session->flash('auth'); ?> -->
+        <!-- echo $session->flash(); ?> -->
         <?php echo $this->Form->input('username');
         echo $this->Form->input('password');
+        echo $this->Form->input('password_confirmation', array('type'=>'password'));
+        if ($admin){
         echo $this->Form->input('role', array(
             'options' => array('admin' => 'Admin', 'author' => 'Author')
         ));
+        }
     ?>
     </fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
