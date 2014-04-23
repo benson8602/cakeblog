@@ -78,9 +78,9 @@ class DATABASE_CONFIG {
  		'datasource' => 'Database/Mysql',
  		'persistent' => false,
 		'host' => 'eu-cdbr-azure-north-c.cloudapp.net',
- 		'login' => 'bb2239495da67a',
-		'password' => 'c6fbb841',
-		'database' => 'ctbensoAtUVDTyGS',
+ 		'login' => 'b90520d66503bb',
+		'password' => '5ce1d2f7',
+		'database' => 'ctbensoAPlZaHIDZ',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
