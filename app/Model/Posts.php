@@ -6,6 +6,8 @@ App::uses('AppModel', 'Model');
  * @property User $User
  */
 class Post extends AppModel {
+	
+	public $name = 'Post';
 /**
  * Validation rules
  *
